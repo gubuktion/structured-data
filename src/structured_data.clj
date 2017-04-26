@@ -24,10 +24,16 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (cond
+      (< (- x1 x2) 0) (* (- x1 x2) -1)
+      :else (- x1 x2))))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (cond
+      (< (- y1 y2) 0) (* (- y1 y2) -1)
+      :else (- y1 y2))))
 
 (defn square? [rectangle]
   :-)
