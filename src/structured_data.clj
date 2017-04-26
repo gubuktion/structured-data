@@ -36,7 +36,11 @@
       :else (- y1 y2))))
 
 (defn square? [rectangle]
-  :-)
+  (cond
+    (= (width rectangle) 0) false
+    (= (height rectangle) 0) false
+    (= (width rectangle) (height rectangle)) true
+    :else false))
 
 (defn area [rectangle]
   :-)
