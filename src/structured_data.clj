@@ -23,17 +23,25 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
+;(defn width [rectangle]
+;  (let [[[x1 y1] [x2 y2]] rectangle]
+;    (cond
+;      (< (- x1 x2) 0) (* (- x1 x2) -1)
+;      :else (- x1 x2))))
+
 (defn width [rectangle]
-  (let [[[x1 y1] [x2 y2]] rectangle]
-    (cond
-      (< (- x1 x2) 0) (* (- x1 x2) -1)
-      :else (- x1 x2))))
+  (let [[[x1 _] [x2 _]] rectangle]
+    (Math/abs (- x1 x2))))
 
 (defn height [rectangle]
-  (let [[[x1 y1] [x2 y2]] rectangle]
-    (cond
-      (< (- y1 y2) 0) (* (- y1 y2) -1)
-      :else (- y1 y2))))
+  (let [[[_ y1] [_ y2]] rectangle]
+    (Math/abs (- y1 y2))))
+
+;(defn height [rectangle]
+;  (let [[[x1 y1] [x2 y2]] rectangle]
+;    (cond
+;      (< (- y1 y2) 0) (* (- y1 y2) -1)
+;      :else (- y1 y2))))
 
 (defn square? [rectangle]
   (cond
@@ -46,7 +54,10 @@
   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle [x y] point]
+    (cond (and (<= x1 x x2) (<= y1 y y2)) true
+          (and (<= x2 x x1) (<= y2 y y1)) true
+          :else false)))
 
 (defn contains-rectangle? [outer inner]
   :-)
