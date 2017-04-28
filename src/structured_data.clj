@@ -6,7 +6,7 @@
     (Math/pow double-x double-x)))
 
 (defn spiff [v]
-  (+ (get v 0) (get v 2)) )
+  (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
   (conj v "<3"))
@@ -15,7 +15,7 @@
   (let
     [[a b c] v]
     (+ a c)
-    ) )
+    ))
 
 (defn point [x y]
   [x y])
@@ -50,21 +50,27 @@
   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  (let [[[x1 y1] [x2 y2]] rectangle [x y] point]
-    (cond (and (<= x1 x x2) (<= y1 y y2)) true
-          (and (<= x2 x x1) (<= y2 y y1)) true
-          :else false)))
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [x y] point]
+    (and (<= (min x1 x2) x (max x1 x2))
+         (<= (min y1 y2) y (max y1 y2)))))
+
+
+;(defn contains-rectangle? [outer inner]
+;  (let [[[x1 y1] [x2 y2]] outer [[x3 y3] [x4 y4]] inner]
+;    (cond (and (<= x1 x3 x4 x2) (<= y1 y3 y4 y2)) true
+;          (and (<= x1 x4 x3 x2) (<= y1 y4 y3 y2)) true
+;          (and (<= x2 x3 x4 x1) (<= y2 y3 y4 y1)) true
+;          (and (<= x2 x4 x3 x1) (<= y2 y3 y4 y1)) true
+;          :else false)))
 
 (defn contains-rectangle? [outer inner]
-  (let [[[x1 y1] [x2 y2]] outer [[x3 y3] [x4 y4]] inner]
-    (cond (and (<= x1 x3 x4 x2) (<= y1 y3 y4 y2)) true
-          (and (<= x1 x4 x3 x2) (<= y1 y4 y3 y2)) true
-          (and (<= x2 x3 x4 x1) (<= y2 y3 y4 y1)) true
-          (and (<= x2 x4 x3 x1) (<= y2 y3 y4 y1)) true
-          :else false)))
+  (let [[p1 p2] inner]
+    (and (contains-point? outer p1)
+         (contains-point? outer p2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
   :-)
